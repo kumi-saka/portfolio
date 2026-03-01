@@ -3,6 +3,8 @@ import { FaBriefcase, FaFolderOpen, FaCode, FaPalette } from 'react-icons/fa'
 import { FaSpaghettiMonsterFlying, FaPlane } from 'react-icons/fa6'
 
 function Header({ activeSection, setActiveSection }) {
+  const avatarImageUrl = `${import.meta.env.BASE_URL}avatar/fuzoku-kawayurashisa.jpg`
+
   return (
     <header className="header">
       <div className="header-container">
@@ -11,7 +13,7 @@ function Header({ activeSection, setActiveSection }) {
             <div className="header-title-row">
               <div className="header-avatar">
                 <img
-                  src="/avatar/fuzoku-kawayurashisa.jpg"
+                  src={avatarImageUrl}
                   alt="風俗三十二相 かわゆらしさう"
                   className="header-avatar-image"
                   onError={(e) => {

@@ -84,6 +84,8 @@ const works = [
 ]
 
 function Works() {
+  const toPagesAssetUrl = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\//, '')}`
+
   return (
     <section className="works">
       <h2 className="section-title">Works</h2>
@@ -94,7 +96,7 @@ function Works() {
             {work.thumbnail && (
               <div className="work-thumbnail">
                 <img
-                  src={work.thumbnail}
+                  src={toPagesAssetUrl(work.thumbnail)}
                   alt={work.title}
                   className="work-thumbnail-image"
                   loading="lazy"
