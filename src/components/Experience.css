@@ -1,0 +1,184 @@
+.experience {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.experience-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding-left: 140px; /* 年数表示用のスペース */
+}
+
+/* タイムラインの縦線 */
+.experience-list::before {
+  content: '';
+  position: absolute;
+  left: 120px; /* 年数表示の右側に配置 */
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: rgba(26, 29, 41, 0.1); /* 薄いグレー */
+}
+
+.experience-item {
+  position: relative;
+  display: flex;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-md);
+  padding-left: calc(var(--spacing-md) + 20px);
+  margin-left: 0;
+  background-color: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  overflow: visible; /* 円形マーカーがカードの外側に表示されるように */
+}
+
+/* タイムラインの円形マーカー（縦線上に配置） */
+.experience-item::before {
+  content: '';
+  position: absolute;
+  left: -20px; /* タイムラインの縦線（left: 120px）の位置に配置（140px - 120px = 20px） */
+  top: calc(var(--spacing-md) - 1px); /* 接続線と中央揃えになるように少し上に配置 */
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  /* 色の選択肢（コメントアウトを切り替えて試してください） */
+  /* background-color: #0EA5E9; */ /* 1. スカイブルー500 - 明るい青 */
+  /* background-color: #14B8A6; */ /* 2. ティール500 - 青緑系 */
+  /* background-color: var(--color-accent-green); */ /* 3. エメラルドグリーン500 - 鮮やかな緑 */
+  /* background-color: #6366F1; */ /* 4. インディゴ500 - 深い青紫 */
+  /* background-color: #8B5CF6; */ /* 5. バイオレット500 - 紫系 */
+  /* background-color: #EC4899; */ /* 6. ローズピンク500 - ピンク系 */
+  /* background-color: #06B6D4; */ /* 7. シアン500 - 明るい青緑 */
+  /* background-color: #3B82F6; */ /* 8. ブルー500 - 標準的な青 */
+  background-color: var(--color-accent-green); /* エメラルドグリーン500 */
+  border: 2px solid #ffffff;
+  transform: translateX(-50%); /* 縦線の中央に配置 */
+  z-index: 3;
+}
+
+/* タイムラインからカードへの横線（接続線） */
+.experience-item::after {
+  content: '';
+  position: absolute;
+  left: calc(-20px + 6px); /* 円形マーカーからカードへの接続線 */
+  top: calc(var(--spacing-md) + 5px); /* 円形マーカーの中央と揃える */
+  width: calc(20px - 6px); /* タイムラインからカードまでの距離 */
+  height: 2px;
+  background-color: rgba(26, 29, 41, 0.1); /* 薄いグレー */
+  z-index: 2;
+}
+
+.experience-item:hover {
+  background-color: var(--color-bg-tertiary);
+  border-color: var(--color-border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+
+.experience-period {
+  position: absolute;
+  left: -140px; /* タイムラインの左側に配置 */
+  top: var(--spacing-md);
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Inter', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-green); /* エメラルドグリーン500 */
+  white-space: nowrap;
+  width: 120px;
+  text-align: right;
+  padding-right: var(--spacing-md);
+  line-height: 1.5;
+}
+
+.experience-content {
+  flex: 1;
+}
+
+.experience-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
+}
+
+.experience-company {
+  color: var(--color-accent-green); /* エメラルドグリーン500 - 円形マーカーと同じ色 */
+  font-weight: 500;
+}
+
+.experience-description {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.experience-tasks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+  align-items: center;
+}
+
+.experience-tasks-label {
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+}
+
+.experience-task {
+  display: inline-block;
+  font-size: 12px;
+  padding: 4px var(--spacing-xs);
+  background-color: var(--color-bg-tertiary);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+}
+
+@media (max-width: 768px) {
+  .experience-list {
+    padding-left: 100px;
+  }
+
+  .experience-list::before {
+    left: 80px;
+  }
+
+  .experience-item {
+    padding-left: calc(var(--spacing-md) + 10px);
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .experience-item::before {
+    left: 80px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .experience-item::after {
+    left: calc(80px + 5px);
+    width: var(--spacing-sm);
+  }
+
+  .experience-period {
+    left: -100px;
+    width: 80px;
+    font-size: 12px;
+    padding-right: var(--spacing-sm);
+  }
+
+  .experience-title {
+    font-size: 16px;
+  }
+
+  .experience-description {
+    font-size: 13px;
+  }
+}
