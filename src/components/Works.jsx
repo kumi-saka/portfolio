@@ -39,7 +39,7 @@ const works = [
     },
     appUrl: 'https://kumi-saka.github.io/pomodoro-study-music/',
     appLabel: 'デモサイト',
-    storybookUrl: 'https://www.chromatic.com/library?appId=695f311e6b1f9784a5cc8058',
+    storybookUrl: 'https://695f311e6b1f9784a5cc8058-enwmtuvkju.chromatic.com/',
     repoUrl: 'https://github.com/kumi-saka/pomodoro-study-music/',
     titleIcon: FaClock,
   },
