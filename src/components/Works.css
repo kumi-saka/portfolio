@@ -121,6 +121,20 @@
   color: var(--color-text-secondary);
 }
 
+.work-tech-summary {
+  margin: 0 0 var(--spacing-xs);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.work-tech-summary-label {
+  display: inline-block;
+  margin-right: 6px;
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
 .work-case-summary {
   margin: 0 0 var(--spacing-xs);
   padding: 10px 12px;
@@ -188,6 +202,19 @@
   font-size: 14px;
   line-height: 1.6;
   color: var(--color-text-secondary);
+}
+
+.work-scope {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+.work-scope-list {
+  flex: 1;
 }
 
 .work-label {

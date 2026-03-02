@@ -30,8 +30,10 @@ const works = [
     title: 'ポモドーロアプリ（個人制作）',
     year: '2026',
     responsibilities: ['企画', 'ノーコード制作', 'UIデザイン'],
+    scope: ['情報設計', 'UI', 'プロトタイプ', '進行管理', '実装連携'],
     tools: ['Cursor AI', 'Storybook', 'Spotify API（想定）'],
     note: 'ノーコードを起点に制作し、デザインツールを使わずにUI設計を進行。コンポーネントはStorybookで管理し、設計と実装の往復をしやすい構成にしています。',
+    techSummary: 'ノーコード構築、コンポーネントをStorybook管理、Spotify連携は設計済み（実装途中）。',
     caseSummary: {
       challenge: '学習プロジェクトでも、実務に近い設計・改善フローを再現したい。',
       approach: 'コンポーネント単位で仕様を分解し、Storybookで見た目と状態を検証。GitHub Pagesで公開し、改善サイクルを回せる状態を整備。',
@@ -47,18 +49,15 @@ const works = [
     title: '占いアプリ CS・CX達成のための発案・構築・運用全般',
     year: '2019',
     responsibilities: ['デザイン', 'ディレクション', 'CX'],
+    scope: ['情報設計', 'UI', '進行管理', '改善運用'],
     tools: ['Adobe XD', 'Googleスプレッドシート', 'Google Analytics'],
-    caseSummary: {
-      challenge: '継続利用と問い合わせ品質の改善が必要だった。',
-      approach: '体験導線を見直し、利用状況を分析しながら優先度の高い改善施策を継続実行。',
-      result: '運用チームと連携した改善サイクルを定着。CS/CXの観点で意思決定しやすい状態を実現。',
-    },
     titleIcon: FaMoon,
   },
   {
     title: '事業会社 コーポレートサイトリニューアル',
     year: '2019',
     responsibilities: ['デザイン', 'ディレクション'],
+    scope: ['情報設計', 'UI', '進行管理'],
     tools: ['Adobe XD', 'Figma'],
     titleIcon: FaBuilding,
   },
@@ -66,6 +65,7 @@ const works = [
     title: '保育士専門学校オフィシャルサイトリニューアル',
     year: '2018',
     responsibilities: ['デザイン', 'コーディング'],
+    scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Photoshop'],
     titleIcon: FaChild,
   },
@@ -73,6 +73,7 @@ const works = [
     title: '電話占い サービスロゴデザイン作成',
     year: '2018',
     responsibilities: ['デザイン'],
+    scope: ['コンセプト設計', 'UI', 'ビジュアル設計'],
     tools: ['Illustrator', 'Photoshop'],
     titleIcon: FaPenNib,
   },
@@ -80,6 +81,7 @@ const works = [
     title: '電話占いサイト・クリエイティブデザインリニューアル',
     year: '2018',
     responsibilities: ['デザイン', 'コーディング'],
+    scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Photoshop'],
     titleIcon: FaMoon,
   },
@@ -87,6 +89,7 @@ const works = [
     title: 'グループ会社（人材領域） コーポレートサイトリニューアル',
     year: '2017',
     responsibilities: ['デザイン', 'コーディング'],
+    scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Photoshop'],
     titleIcon: FaUsers,
   },
@@ -94,6 +97,7 @@ const works = [
     title: '食品系商社コーポレートサイト リニューアル',
     year: '2017',
     responsibilities: ['デザイン', 'サブコーディング'],
+    scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Googleスプレッドシート'],
     titleIcon: FaShippingFast,
   },
@@ -101,6 +105,7 @@ const works = [
     title: '国内メーカー化粧品ブランドの海外向けサイト 新規構築',
     year: '2016',
     responsibilities: ['デザイン', 'サブコーディング'],
+    scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Google Analytics'],
     titleIcon: FaPaintBrush,
   },
@@ -108,6 +113,7 @@ const works = [
     title: 'グループ会社（人材領域） 新卒採用サイトリニューアル',
     year: '2016',
     responsibilities: ['デザイン', 'サブコーディング'],
+    scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Googleスプレッドシート'],
     titleIcon: FaUserTie,
   },
@@ -182,6 +188,12 @@ function Works() {
                   </span>
                 </h3>
                 {work.note && <p className="work-note">{work.note}</p>}
+                {work.techSummary && (
+                  <p className="work-tech-summary">
+                    <span className="work-tech-summary-label">技術要約:</span>
+                    {work.techSummary}
+                  </p>
+                )}
                 {work.caseSummary && (
                   <div className="work-case-summary">
                     <p className="work-case-item"><span className="work-case-label">課題:</span>{work.caseSummary.challenge}</p>
@@ -227,6 +239,12 @@ function Works() {
                   </div>
                 )}
                 <div className="work-overview">
+                {work.scope && work.scope.length > 0 && (
+                  <div className="work-scope">
+                    <span className="work-label">担当範囲:</span>
+                    <span className="work-scope-list">{work.scope.join(' / ')}</span>
+                  </div>
+                )}
                 <div className="work-responsibilities">
                   <span className="work-label">担当:</span>
                   <span className="work-responsibilities-list">
