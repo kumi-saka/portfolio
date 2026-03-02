@@ -31,7 +31,12 @@ const works = [
     year: '2026',
     responsibilities: ['企画', 'ノーコード制作', 'UIデザイン'],
     tools: ['Cursor AI', 'Storybook', 'Spotify API（想定）'],
-    note: 'ノーコードで制作。デザインツールは使用せず、コンポーネントはStorybookで管理。Spotify連携により、プレイリスト音楽が流れる実装を想定。まだ音楽は流れません。',
+    note: 'ノーコードを起点に制作し、デザインツールを使わずにUI設計を進行。コンポーネントはStorybookで管理し、設計と実装の往復をしやすい構成にしています。',
+    caseSummary: {
+      challenge: '学習プロジェクトでも、実務に近い設計・改善フローを再現したい。',
+      approach: 'コンポーネント単位で仕様を分解し、Storybookで見た目と状態を検証。GitHub Pagesで公開し、改善サイクルを回せる状態を整備。',
+      result: 'デモ公開とUIカタログ運用まで実装。UX改善を継続できる土台を構築。',
+    },
     appUrl: 'https://kumi-saka.github.io/pomodoro-study-music/',
     appLabel: 'デモサイト',
     storybookUrl: 'https://www.chromatic.com/library?appId=695f311e6b1f9784a5cc8058&inviteToken=chpi_a98586385bf34ec6811c7a9a61bd7b11',
@@ -43,6 +48,11 @@ const works = [
     year: '2019',
     responsibilities: ['デザイン', 'ディレクション', 'CX'],
     tools: ['Adobe XD', 'Googleスプレッドシート', 'Google Analytics'],
+    caseSummary: {
+      challenge: '継続利用と問い合わせ品質の改善が必要だった。',
+      approach: '体験導線を見直し、利用状況を分析しながら優先度の高い改善施策を継続実行。',
+      result: '運用チームと連携した改善サイクルを定着。CS/CXの観点で意思決定しやすい状態を実現。',
+    },
     titleIcon: FaMoon,
   },
   {
@@ -132,7 +142,11 @@ function Works() {
   return (
     <section className="works">
       <h2 className="section-title">Works</h2>
-      <p className="works-lead">本ページには、2019までの主な案件と最近の個人制作を掲載しています。</p>
+      <p className="works-lead">
+        本ページには、公開可能な範囲で2019年までの主な案件と最近の個人制作を掲載しています。
+        <br />
+        クライアントワークや社内システム案件の詳細は、守秘義務の観点から掲載可能な範囲で一部のみ記載しています。
+      </p>
 
       <div className="works-list">
         {works.map((work, index) => {
@@ -168,6 +182,13 @@ function Works() {
                   </span>
                 </h3>
                 {work.note && <p className="work-note">{work.note}</p>}
+                {work.caseSummary && (
+                  <div className="work-case-summary">
+                    <p className="work-case-item"><span className="work-case-label">課題:</span>{work.caseSummary.challenge}</p>
+                    <p className="work-case-item"><span className="work-case-label">施策:</span>{work.caseSummary.approach}</p>
+                    <p className="work-case-item"><span className="work-case-label">成果:</span>{work.caseSummary.result}</p>
+                  </div>
+                )}
                 {(work.appUrl || work.storybookUrl || work.repoUrl) && (
                   <div className="work-links">
                     {work.appUrl && (

@@ -54,6 +54,20 @@ function Header({ activeSection, setActiveSection }) {
                 <p className="header-description header-description-note">
                   最近は学習のため、ノーコードでアプリを作ってみたりしています。
                 </p>
+                <ul className="header-value-summary">
+                  <li>
+                    <span className="header-value-tag">設計</span>
+                    <span className="header-value-text">課題整理から情報設計・画面設計まで、状況に応じて幅広く担当</span>
+                  </li>
+                  <li>
+                    <span className="header-value-tag">UX</span>
+                    <span className="header-value-text">ユーザーインタビュー/CJMを起点に改善提案を実施</span>
+                  </li>
+                  <li>
+                    <span className="header-value-tag">連携</span>
+                    <span className="header-value-text">デザインと実装の橋渡し役として、意思決定と開発をサポート</span>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>

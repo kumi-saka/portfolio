@@ -153,20 +153,68 @@
 
 .header-title-text {
   text-align: left;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  white-space: nowrap;
+  margin-bottom: 12px;
 }
 
 .header-title-text h1 {
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 0;
   margin-top: 0;
 }
 
 .header-subtitle {
   font-size: 14px;
   color: var(--color-text-secondary);
-  display: block;
+  display: inline-block;
+  margin: 0;
+}
+
+.header-value-summary {
   margin: 0 0 12px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 8px;
+}
+
+.header-value-summary li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 0;
+}
+
+.header-value-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.8em;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-navy-accent);
+  background: rgba(29, 53, 87, 0.14);
+}
+
+.header-value-summary li:nth-child(2) .header-value-tag {
+  color: #0f7a57;
+  background: rgba(16, 185, 129, 0.18);
+}
+
+.header-value-text {
+  flex: 1;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
 }
 
 .header-description {
@@ -180,6 +228,7 @@
 
 .header-description-note {
   margin-top: 6px;
+  margin-bottom: 14px;
 }
 
 .header-copy {
@@ -321,7 +370,44 @@
     border-top: 1px solid var(--color-border);
   }
 
+  .header-nav-container {
+    padding: var(--spacing-xs) var(--spacing-sm) 0;
+    gap: var(--spacing-md);
+  }
+
   .nav-button {
     flex: 1;
+    min-height: 52px;
+    padding-bottom: var(--spacing-xs);
+    gap: 2px;
+  }
+
+  .nav-icon {
+    font-size: 22px;
+  }
+
+  .nav-text {
+    font-size: 12px;
+  }
+
+  .header-value-summary {
+    margin-bottom: 10px;
+    gap: 6px;
+  }
+
+  .header-value-summary li {
+    gap: 6px;
+  }
+
+  .header-value-tag {
+    min-width: 2.6em;
+    height: 18px;
+    font-size: 10px;
+    padding: 0 6px;
+  }
+
+  .header-value-text {
+    font-size: 12px;
+    line-height: 1.55;
   }
 }
