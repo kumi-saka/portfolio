@@ -1,79 +1,67 @@
 import { useEffect, useState } from 'react'
 import './DesignGuideline.css'
 
-const fallbackColorVars = [
-  '--color-navy-accent',
-  '--color-accent',
-  '--color-accent-green',
-  '--color-bg-primary',
-  '--color-bg-secondary',
-  '--color-text-primary'
+const fallbackColors = [
+  ['--color-navy-accent', '#1d3557', 'ページ上部ライン、見出し色、ガイド系の基調色'],
+  ['--color-accent', '#dc2626', 'タブのアクティブ状態、強調テキスト・アイコン'],
+  ['--color-accent-hover', '#ef4444', 'アクセントのホバー状態'],
+  ['--color-accent-light', 'rgba(220, 38, 38, 0.1)', 'アクセントの薄い背景（補助ハイライト）'],
+  ['--color-accent-green', '#10b981', 'Experience の年表示/ドット、Skills の分析リング'],
+  ['--color-bg-primary', '#f8fafc', 'ページ全体の背景'],
+  ['--color-bg-secondary', '#ffffff', 'ヘッダー・カードなどの面背景'],
+  ['--color-bg-tertiary', '#f1f5f9', 'タグ/小要素背景、ホバー時の補助背景'],
+  ['--color-text-primary', '#1f2937', '見出し・主要テキスト'],
+  ['--color-text-secondary', '#4b5563', '本文・説明文'],
+  ['--color-text-tertiary', '#6b7280', '補助テキスト'],
+  ['--color-border', '#e2e8f0', '通常の境界線'],
+  ['--color-border-hover', '#cbd5e1', 'ホバー時の境界線'],
 ]
 
-const fallbackSpacingVars = [
-  '--spacing-xs',
-  '--spacing-sm',
-  '--spacing-md',
-  '--spacing-lg',
-  '--spacing-xl',
-  '--spacing-2xl'
+const fallbackSpacing = [
+  ['--spacing-xs', '8px'],
+  ['--spacing-sm', '12px'],
+  ['--spacing-md', '16px'],
+  ['--spacing-lg', '24px'],
+  ['--spacing-xl', '32px'],
+  ['--spacing-2xl', '48px'],
 ]
 
-const fallbackRadiusVars = ['--radius-sm', '--radius-md', '--radius-lg']
-const fallbackShadowVars = ['--shadow-sm', '--shadow-md', '--shadow-lg']
-const typographyTokens = [
-  {
-    name: 'Page Title',
-    htmlTag: 'h1',
-    size: '24px',
-    weight: 700,
-    lineHeight: 1.3,
-    sample: 'sakamoto',
-    usage: 'ページの主題（プロフィール名）'
-  },
-  {
-    name: 'Section Title',
-    htmlTag: 'h2',
-    size: '32px',
-    weight: 700,
-    lineHeight: 1.3,
-    sample: 'Experience',
-    usage: '主要セクション見出し'
-  },
-  {
-    name: 'Card Title',
-    htmlTag: 'h3',
-    size: '18px',
-    weight: 600,
-    lineHeight: 1.5,
-    sample: 'コーポレートサイトリニューアル',
-    usage: 'カード単位の見出し'
-  },
-  {
-    name: 'Body',
-    htmlTag: 'p',
-    size: '14px',
-    weight: 400,
-    lineHeight: 1.7,
-    sample: '本文テキストの読みやすさを重視した標準サイズ。',
-    usage: '説明文・段落'
-  },
-  {
-    name: 'Caption / Tag',
-    htmlTag: 'span',
-    size: '12px',
-    weight: 500,
-    lineHeight: 1.5,
-    sample: 'Tools & topics',
-    usage: '補助情報・タグ'
-  }
+const fallbackRadius = [
+  ['--radius-sm', '8px'],
+  ['--radius-md', '12px'],
+  ['--radius-lg', '16px'],
 ]
 
-const toLabel = (name) =>
-  name
-    .replace(/^--/, '')
-    .replace(/-/g, ' ')
-    .replace(/\b\w/g, (s) => s.toUpperCase())
+const fallbackShadow = [
+  ['--shadow-sm', '0 1px 2px rgba(0, 0, 0, 0.08)'],
+  ['--shadow-md', '0 10px 20px rgba(0, 0, 0, 0.08)'],
+  ['--shadow-lg', '0 20px 40px rgba(0, 0, 0, 0.12)'],
+]
+
+const colorGroups = [
+  {
+    title: 'Accent',
+    vars: [
+      '--color-navy-accent',
+      '--color-accent',
+      '--color-accent-hover',
+      '--color-accent-light',
+      '--color-accent-green',
+    ],
+  },
+  {
+    title: 'Background',
+    vars: ['--color-bg-primary', '--color-bg-secondary', '--color-bg-tertiary'],
+  },
+  {
+    title: 'Text',
+    vars: ['--color-text-primary', '--color-text-secondary', '--color-text-tertiary'],
+  },
+  {
+    title: 'Border',
+    vars: ['--color-border', '--color-border-hover'],
+  },
+]
 
 const colorLabelMap = {
   '--color-navy-accent': 'Accent Navy',
@@ -88,164 +76,106 @@ const colorLabelMap = {
   '--color-text-secondary': 'Text Secondary',
   '--color-text-tertiary': 'Text Tertiary',
   '--color-border': 'Border Default',
-  '--color-border-hover': 'Border Hover'
+  '--color-border-hover': 'Border Hover',
 }
 
-const colorUsageMap = {
-  '--color-navy-accent': 'ページ上部ライン、見出し色、ガイド系の基調色',
-  '--color-accent': 'タブのアクティブ状態、強調テキスト・アイコン',
-  '--color-accent-hover': 'アクセントのホバー状態',
-  '--color-accent-light': 'アクセントの薄い背景（補助ハイライト）',
-  '--color-accent-green': 'Experience の年表示/ドット、Skills の分析リング',
-  '--color-bg-primary': 'ページ全体の背景',
-  '--color-bg-secondary': 'ヘッダー・カードなどの面背景',
-  '--color-bg-tertiary': 'タグ/小要素背景、ホバー時の補助背景',
-  '--color-text-primary': '見出し・主要テキスト',
-  '--color-text-secondary': '本文・説明文',
-  '--color-text-tertiary': '補助テキスト',
-  '--color-border': '通常の境界線',
-  '--color-border-hover': 'ホバー時の境界線'
-}
-
-const getColorUsage = (name) => colorUsageMap[name] || '補助カラー'
-const getColorLabel = (name) => colorLabelMap[name] || toLabel(name)
-
-const colorGroups = [
-  {
-    title: 'Accent',
-    vars: [
-      '--color-navy-accent',
-      '--color-accent',
-      '--color-accent-hover',
-      '--color-accent-light',
-      '--color-accent-green'
-    ]
-  },
-  {
-    title: 'Background',
-    vars: ['--color-bg-primary', '--color-bg-secondary', '--color-bg-tertiary']
-  },
-  {
-    title: 'Text',
-    vars: ['--color-text-primary', '--color-text-secondary', '--color-text-tertiary']
-  },
-  {
-    title: 'Border',
-    vars: ['--color-border', '--color-border-hover']
-  }
-]
+const colorUsageMap = Object.fromEntries(fallbackColors.map(([name, _, usage]) => [name, usage]))
 
 const shadowUsageMap = {
   '--shadow-sm': {
     where: 'Experience/Tools カードの通常状態',
-    rule: '情報をフラットに見せたい通常時の基本影。'
+    rule: '情報をフラットに見せたい通常時の基本影。',
   },
   '--shadow-md': {
     where: 'Experience/Works/Tools カードの hover 時',
-    rule: 'インタラクティブ要素を強調したい時にのみ付与。'
+    rule: 'インタラクティブ要素を強調したい時にのみ付与。',
   },
   '--shadow-lg': {
     where: '現状未使用（モーダル・重要告知などの候補）',
-    rule: '画面内で最も目立たせたい層に限定して使用。'
-  }
+    rule: '画面内で最も目立たせたい層に限定して使用。',
+  },
 }
-
-const getShadowUsage = (name) =>
-  shadowUsageMap[name] || {
-    where: '要確認',
-    rule: '用途を決めてから使用。'
-  }
 
 const radiusUsageMap = {
-  '--radius-sm': {
-    where: 'タグ、バッジ、補助UI',
-    rule: '小さい要素を軽く丸めたい時に使う。'
-  },
-  '--radius-md': {
-    where: 'カード、リスト、通常コンテナ',
-    rule: '基本の面要素は原則これを使う。'
-  },
-  '--radius-lg': {
-    where: '強調カード、ヒーロー領域',
-    rule: '視線誘導したい大きい要素に限定して使う。'
-  }
+  '--radius-sm': { where: 'タグ、バッジ、補助UI', rule: '小さい要素を軽く丸めたい時に使う。' },
+  '--radius-md': { where: 'カード、リスト、通常コンテナ', rule: '基本の面要素は原則これを使う。' },
+  '--radius-lg': { where: '強調カード、ヒーロー領域', rule: '視線誘導したい大きい要素に限定して使う。' },
 }
 
-const getRadiusUsage = (name) =>
-  radiusUsageMap[name] || {
-    where: '要確認',
-    rule: '要素サイズと文脈に合わせて選定。'
-  }
+const typographyTokens = [
+  { name: 'Page Title', semantic: 'h1', size: '24px', weight: 700, lineHeight: 1.3, sample: 'sakamoto' },
+  { name: 'Section Title', semantic: 'h2', size: '32px', weight: 700, lineHeight: 1.3, sample: 'Works' },
+  {
+    name: 'Card Title',
+    semantic: 'h3',
+    size: '18px',
+    weight: 600,
+    lineHeight: 1.5,
+    sample: 'コーポレートサイトリニューアル',
+  },
+  {
+    name: 'Body',
+    semantic: 'p',
+    size: '14px',
+    weight: 400,
+    lineHeight: 1.7,
+    sample: '本文テキストの読みやすさを重視した標準サイズ。',
+  },
+  { name: 'Caption / Tag', semantic: 'span', size: '12px', weight: 500, lineHeight: 1.5, sample: 'Tools & topics' },
+]
 
-const getRootCustomProps = () => {
-  const names = new Set()
-  for (const sheet of Array.from(document.styleSheets)) {
-    let rules
-    try {
-      rules = sheet.cssRules
-    } catch {
-      continue
-    }
-    if (!rules) continue
-    for (const rule of Array.from(rules)) {
-      if (!rule.selectorText || !rule.style) continue
-      if (!rule.selectorText.includes(':root')) continue
-      for (const propName of Array.from(rule.style)) {
-        if (propName.startsWith('--')) names.add(propName)
-      }
-    }
-  }
-  return Array.from(names)
+const toLabel = (name) => name.replace(/^--/, '').replace(/-/g, ' ')
+
+const readToken = (style, name, fallback) => {
+  const value = style.getPropertyValue(name).trim()
+  return value || fallback
 }
 
 function DesignGuideline() {
-  const [colorTokens, setColorTokens] = useState([])
-  const [spacingTokens, setSpacingTokens] = useState([])
-  const [radiusTokens, setRadiusTokens] = useState([])
-  const [shadowTokens, setShadowTokens] = useState([])
+  const [colorTokens, setColorTokens] = useState(
+    fallbackColors.map(([name, value]) => ({ name, label: colorLabelMap[name] || toLabel(name), value })),
+  )
+  const [spacingTokens, setSpacingTokens] = useState(
+    fallbackSpacing.map(([name, value]) => ({ name, label: toLabel(name), value })),
+  )
+  const [radiusTokens, setRadiusTokens] = useState(
+    fallbackRadius.map(([name, value]) => ({ name, label: toLabel(name), value })),
+  )
+  const [shadowTokens, setShadowTokens] = useState(
+    fallbackShadow.map(([name, value]) => ({ name, label: toLabel(name), value })),
+  )
 
   useEffect(() => {
-    const root = document.documentElement
-    const computed = getComputedStyle(root)
-    const rootVars = getRootCustomProps()
+    const rootStyle = getComputedStyle(document.documentElement)
 
-    const colorVars =
-      rootVars.filter((v) => v.startsWith('--color-')).sort() || fallbackColorVars
-    const spacingVars =
-      rootVars.filter((v) => v.startsWith('--spacing-')).sort() || fallbackSpacingVars
-    const radiusVars =
-      rootVars.filter((v) => v.startsWith('--radius-')).sort() || fallbackRadiusVars
-    const shadowVars =
-      rootVars.filter((v) => v.startsWith('--shadow-')).sort() || fallbackShadowVars
-
-    const resolvedColorVars = (colorVars.length > 0 ? colorVars : fallbackColorVars).map((name) => ({
-      name,
-      label: getColorLabel(name),
-      value: computed.getPropertyValue(name).trim()
-    }))
-
-    const resolvedSpacingVars = (spacingVars.length > 0 ? spacingVars : fallbackSpacingVars).map((name) => ({
-      name,
-      label: toLabel(name),
-      value: computed.getPropertyValue(name).trim()
-    }))
-
-    const resolvedRadiusVars = (radiusVars.length > 0 ? radiusVars : fallbackRadiusVars).map((name) => ({
-      name,
-      label: toLabel(name),
-      value: computed.getPropertyValue(name).trim()
-    }))
-
-    const resolvedShadowVars = (shadowVars.length > 0 ? shadowVars : fallbackShadowVars).map((name) => ({
-      name,
-      label: toLabel(name),
-      value: computed.getPropertyValue(name).trim()
-    }))
-
-    setColorTokens(resolvedColorVars)
-    setSpacingTokens(resolvedSpacingVars)
-    setRadiusTokens(resolvedRadiusVars)
-    setShadowTokens(resolvedShadowVars)
+    setColorTokens(
+      fallbackColors.map(([name, value]) => ({
+        name,
+        label: colorLabelMap[name] || toLabel(name),
+        value: readToken(rootStyle, name, value),
+      })),
+    )
+    setSpacingTokens(
+      fallbackSpacing.map(([name, value]) => ({
+        name,
+        label: toLabel(name),
+        value: readToken(rootStyle, name, value),
+      })),
+    )
+    setRadiusTokens(
+      fallbackRadius.map(([name, value]) => ({
+        name,
+        label: toLabel(name),
+        value: readToken(rootStyle, name, value),
+      })),
+    )
+    setShadowTokens(
+      fallbackShadow.map(([name, value]) => ({
+        name,
+        label: toLabel(name),
+        value: readToken(rootStyle, name, value),
+      })),
+    )
   }, [])
 
   const colorTokenMap = Object.fromEntries(colorTokens.map((token) => [token.name, token]))
@@ -258,9 +188,9 @@ function DesignGuideline() {
         <h3>Design Philosophy</h3>
         <p>このページをデザインする際の方針。わかりやすく、シンプルに。</p>
         <ul className="philosophy-list">
-          <li>情報の優先順位を決め、上から自然に読める構成にする。</li>
-          <li>装飾は最小限にして、内容が主役になる見た目にする。</li>
-          <li>動きや色は意味がある部分だけに使い、迷わせないUIにする。</li>
+          <li>情報の優先順位と読み順を明確にし、ユーザーが迷わない構成にする。</li>
+          <li>装飾は最小限に抑え、コンテンツが主役になる見た目を追求する。</li>
+          <li>動きや色は意味のある箇所だけに使い、ユーザー体験を向上させる。</li>
           <li>読みやすさを損なわない範囲で、ちょっとした遊び心を加える。</li>
         </ul>
       </div>
@@ -282,7 +212,7 @@ function DesignGuideline() {
                         <div className="swatch-meta">
                           <span>{token.label}</span>
                           <code>{token.value}</code>
-                          <small>{getColorUsage(token.name)}</small>
+                          <small>{colorUsageMap[token.name] || '補助カラー'}</small>
                         </div>
                       </div>
                     ))}
@@ -295,17 +225,12 @@ function DesignGuideline() {
 
         <article className="guideline-card">
           <h3>Typography</h3>
-          <p>見た目のサイズとHTMLの見出しレベル（semantic）を分けて管理。</p>
           <div className="type-token-list">
             {typographyTokens.map((token) => (
               <div key={token.name} className="type-token-item">
                 <div
                   className="type-token-sample"
-                  style={{
-                    fontSize: token.size,
-                    fontWeight: token.weight,
-                    lineHeight: token.lineHeight
-                  }}
+                  style={{ fontSize: token.size, fontWeight: token.weight, lineHeight: token.lineHeight }}
                 >
                   {token.sample}
                 </div>
@@ -314,8 +239,7 @@ function DesignGuideline() {
                   <code>
                     {token.size} / {token.weight} / line-height {token.lineHeight}
                   </code>
-                  <small>Semantic: {token.htmlTag}</small>
-                  <small>使用箇所: {token.usage}</small>
+                  <small>Semantic: {token.semantic}</small>
                 </div>
               </div>
             ))}
@@ -324,7 +248,6 @@ function DesignGuideline() {
 
         <article className="guideline-card">
           <h3>Spacing</h3>
-          <p>:root の spacing 変数を自動で読み取り可視化。</p>
           <div className="spacing-list">
             {spacingTokens.map((space) => (
               <div key={space.name} className="spacing-item">
@@ -354,8 +277,8 @@ function DesignGuideline() {
               <div key={shadow.name} className="card-preview-item" style={{ boxShadow: shadow.value }}>
                 <span>{shadow.label}</span>
                 <code>{shadow.value}</code>
-                <small>使用箇所: {getShadowUsage(shadow.name).where}</small>
-                <small>使い分け: {getShadowUsage(shadow.name).rule}</small>
+                <small>使用箇所: {(shadowUsageMap[shadow.name] || {}).where || '要確認'}</small>
+                <small>使い分け: {(shadowUsageMap[shadow.name] || {}).rule || '用途を決めてから使用。'}</small>
               </div>
             ))}
           </div>
@@ -371,8 +294,8 @@ function DesignGuideline() {
                 <div className="radius-meta">
                   <span>{radius.label}</span>
                   <code>{radius.value}</code>
-                  <small>使用箇所: {getRadiusUsage(radius.name).where}</small>
-                  <small>使い分け: {getRadiusUsage(radius.name).rule}</small>
+                  <small>使用箇所: {(radiusUsageMap[radius.name] || {}).where || '要確認'}</small>
+                  <small>使い分け: {(radiusUsageMap[radius.name] || {}).rule || '要素サイズと文脈に合わせて選定。'}</small>
                 </div>
               </div>
             ))}

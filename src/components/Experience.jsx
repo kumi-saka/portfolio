@@ -46,7 +46,14 @@ const experiences = [
     period: '2020 -',
     title: 'UI/UXデザイナー・ディレクター',
     company: '受託制作・開発事業会社',
-    description: '基幹システムや教育関連など幅広い業界のアプリやサイトの受託業務をメインに、ユーザーリサーチからUI/UX改善提案・デザイン作成まで一貫して行なっています。',
+    description: '基幹システムや教育関連など幅広い業界のアプリやサイトの受託業務をメインに、ユーザーリサーチからUI/UX改善提案・デザイン作成を担当しています。',
+    projectHighlights: [
+      'サプライチェーン領域：DX・CO2可視化システムのコンセプトUIデザイン',
+      '医療・金融領域：病院・銀行向け待合システムの画面デザイン',
+      '出版領域：toC向けAI推薦書籍サービスでペルソナ/CJM策定〜画面デザインを一貫担当',
+      '小売領域：店舗納品システムのUIデザイン',
+      '論文検索サービス：UX改善に向けたユーザーリサーチ、ペルソナ、CJM策定を担当',
+    ],
     tasks: ['ディレクション', 'デザイン', 'UX検討', 'たまにコーディング']
   }
 ]
@@ -69,6 +76,16 @@ function Experience() {
                 {exp.company && <span className="experience-company"> ｜{exp.company}</span>}
               </h3>
               <p className="experience-description">{exp.description}</p>
+              {exp.projectHighlights && exp.projectHighlights.length > 0 && (
+                <div className="experience-projects">
+                  <span className="experience-projects-label">参画案件：</span>
+                  <ul className="experience-projects-list">
+                    {exp.projectHighlights.map((project, projectIndex) => (
+                      <li key={projectIndex}>{project}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
               {exp.tasks && (
                 <div className="experience-tasks">
                   <span className="experience-tasks-label">担当業務：</span>

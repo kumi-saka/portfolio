@@ -118,6 +118,30 @@
   margin-bottom: var(--spacing-sm);
 }
 
+.experience-projects {
+  margin: 0 0 var(--spacing-sm);
+}
+
+.experience-projects-label {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.experience-projects-list {
+  margin: 0;
+  padding-left: 1.1em;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.experience-projects-list li + li {
+  margin-top: 2px;
+}
+
 .experience-tasks {
   display: flex;
   flex-wrap: wrap;
@@ -157,14 +181,14 @@
   }
 
   .experience-item::before {
-    left: 80px;
+    left: -20px;
     width: 10px;
     height: 10px;
   }
 
   .experience-item::after {
-    left: calc(80px + 5px);
-    width: var(--spacing-sm);
+    left: calc(-20px + 5px);
+    width: calc(20px - 5px);
   }
 
   .experience-period {

@@ -5,6 +5,7 @@ import Skills from './components/Skills'
 import Experience from './components/Experience'
 import Works from './components/Works'
 import DesignGuideline from './components/DesignGuideline'
+import BirdFlyBy from './components/BirdFlyBy'
 
 function App() {
   const sectionOrder = ['experience', 'works', 'skills', 'guideline']
@@ -36,6 +37,7 @@ function App() {
           {renderActiveSection()}
         </div>
       </main>
+      <BirdFlyBy />
     </div>
   )
 }

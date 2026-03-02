@@ -1,9 +1,14 @@
-.header {
-  background-color: var(--color-bg-secondary);
-  border-bottom: 1px solid var(--color-border);
+.header-stack {
   position: sticky;
   top: 0;
   z-index: 100;
+  background-color: var(--color-bg-secondary);
+}
+
+.header {
+  background-color: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+  position: static;
   backdrop-filter: blur(10px);
 }
 
@@ -28,35 +33,6 @@
   position: relative;
 }
 
-.avatar-float-icons {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-
-.avatar-float-icon {
-  position: absolute;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.14));
-}
-
-.avatar-float-icon-monster {
-  top: 4px;
-  right: -3px;
-  font-size: 20px;
-  color: var(--color-accent);
-  opacity: 0.9;
-  animation: avatar-icon-float-monster 3.7s ease-in-out infinite;
-}
-
-.avatar-float-icon-plane {
-  bottom: 10px;
-  left: -11px;
-  font-size: 15px;
-  color: var(--color-navy-accent);
-  opacity: 0.82;
-  animation: avatar-icon-float-plane 4.3s ease-in-out infinite;
-}
-
 .header-avatar {
   width: 112px;
   height: 112px;
@@ -78,27 +54,100 @@
   transform: scale(1.18);
 }
 
-@keyframes avatar-icon-float-monster {
+.avatar-float-dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.avatar-float-dot {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.75;
+}
+
+.avatar-float-dot:nth-child(1) {
+  width: 7px;
+  height: 7px;
+  top: 6px;
+  right: -8px;
+  background-color: var(--color-accent);
+  animation: avatar-dot-float-a 3.6s ease-in-out infinite;
+}
+
+.avatar-float-dot:nth-child(2) {
+  width: 6px;
+  height: 6px;
+  top: 28px;
+  left: -10px;
+  background-color: var(--color-navy-accent);
+  opacity: 0.5;
+  animation: avatar-dot-float-b 4.4s ease-in-out infinite;
+}
+
+.avatar-float-dot:nth-child(3) {
+  width: 5px;
+  height: 5px;
+  bottom: 16px;
+  right: -12px;
+  background-color: var(--color-accent-green);
+  opacity: 0.58;
+  animation: avatar-dot-float-c 4.1s ease-in-out infinite;
+}
+
+.avatar-float-dot:nth-child(4) {
+  width: 6px;
+  height: 6px;
+  bottom: 2px;
+  left: -7px;
+  background-color: var(--color-accent);
+  opacity: 0.45;
+  animation: avatar-dot-float-b 3.9s ease-in-out infinite reverse;
+}
+
+.avatar-float-dot:nth-child(5) {
+  width: 4px;
+  height: 4px;
+  top: -4px;
+  left: 22px;
+  background-color: var(--color-navy-accent);
+  opacity: 0.55;
+  animation: avatar-dot-float-a 5.2s ease-in-out infinite;
+}
+
+@keyframes avatar-dot-float-a {
   0%,
   100% {
     transform: translate(0, 0) scale(1);
-    opacity: 0.8;
+    opacity: 0.7;
   }
   50% {
-    transform: translate(-3px, -6px) scale(1.08) rotate(-5deg);
-    opacity: 1;
+    transform: translate(-2px, -3px) scale(1.12);
+    opacity: 0.95;
   }
 }
 
-@keyframes avatar-icon-float-plane {
+@keyframes avatar-dot-float-b {
   0%,
   100% {
     transform: translate(0, 0) scale(1);
-    opacity: 0.65;
+    opacity: 0.5;
   }
   50% {
-    transform: translate(5px, -2px) scale(1.08) rotate(8deg);
-    opacity: 0.85;
+    transform: translate(3px, 2px) scale(1.08);
+    opacity: 0.75;
+  }
+}
+
+@keyframes avatar-dot-float-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.58;
+  }
+  50% {
+    transform: translate(-2px, 3px) scale(1.14);
+    opacity: 0.8;
   }
 }
 
@@ -127,6 +176,10 @@
   margin: 0;
   padding-top: 0;
   max-width: none;
+}
+
+.header-description-note {
+  margin-top: 6px;
 }
 
 .header-copy {
@@ -206,6 +259,21 @@
 }
 
 @media (max-width: 768px) {
+  .header-stack {
+    display: contents;
+    position: static;
+    top: auto;
+    z-index: auto;
+    background-color: transparent;
+  }
+
+  .header {
+    position: static;
+    top: auto;
+    z-index: auto;
+    backdrop-filter: none;
+  }
+
   .header-container {
     flex-direction: column;
     align-items: flex-start;
@@ -219,27 +287,38 @@
 
   .header-title-row {
     gap: var(--spacing-sm);
+    margin-top: var(--spacing-xs);
   }
 
-  .avatar-float-icon-monster {
-    top: 3px;
-    right: -2px;
-    font-size: 18px;
+  .avatar-float-dot:nth-child(1) {
+    right: -6px;
   }
 
-  .avatar-float-icon-plane {
-    left: -5px;
-    bottom: 7px;
-    font-size: 14px;
+  .avatar-float-dot:nth-child(2) {
+    left: -8px;
+  }
+
+  .avatar-float-dot:nth-child(3) {
+    right: -8px;
+  }
+
+  .avatar-float-dot:nth-child(4) {
+    left: -6px;
   }
 
   .header-avatar {
-    width: 88px;
-    height: 88px;
+    width: 132px;
+    height: 132px;
   }
 
   .header-nav {
+    position: sticky;
+    top: 3px;
+    z-index: 110;
     width: 100%;
+    background-color: var(--color-bg-secondary);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--color-border);
   }
 
   .nav-button {

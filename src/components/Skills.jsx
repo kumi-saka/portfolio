@@ -1,6 +1,6 @@
 import './Skills.css'
 import { useState } from 'react'
-import { FaUserFriends, FaFileAlt, FaRoute, FaSearch, FaChartBar, FaStickyNote, FaSlack } from 'react-icons/fa'
+import { FaUserFriends, FaFileAlt, FaRoute, FaSearch, FaChartBar, FaStickyNote, FaSlack, FaCode } from 'react-icons/fa'
 
 const skills = {
   design: [
@@ -31,9 +31,6 @@ const skills = {
     'Slack'
   ]
 }
-
-// 統一されたアイコン背景色（シックなグレー）
-const ICON_BG_COLOR = '#4b5563'
 
 // プログレスバーのパーセンテージマッピング
 const getSkillPercentage = (skill) => {
@@ -108,17 +105,20 @@ const getFallbackIcon = (skill) => {
     'notion': FaStickyNote,
     'Slack': FaSlack
   }
-  return iconMap[skill] || null
+  return iconMap[skill] || FaCode
 }
 
 // スキルアイコンコンポーネント
 function SkillIcon({ skill }) {
   const [imageError, setImageError] = useState(false)
   const imagePath = getSkillImagePath(skill)
+  const imageUrl = imagePath
+    ? `${import.meta.env.BASE_URL}${imagePath.replace(/^\//, '')}`
+    : null
   const FallbackIcon = getFallbackIcon(skill)
 
-  // フォールバックアイコンがある場合は、画像が読み込めない場合または画像パスがない場合に表示
-  if (FallbackIcon && (imageError || !imagePath)) {
+  // 画像が読み込めない、または画像パスがない場合はフォールバックアイコンを表示
+  if (imageError || !imageUrl) {
     return (
       <div className="skill-circle-icon-bg">
         <FallbackIcon style={{ color: '#10B981', fontSize: '24px' }} />
@@ -127,11 +127,11 @@ function SkillIcon({ skill }) {
   }
 
   // 画像パスがある場合は画像を表示、エラー時はフォールバックアイコンを表示
-  if (imagePath && !imageError) {
+  if (imageUrl && !imageError) {
     return (
       <div className="skill-circle-icon-bg">
         <img
-          src={imagePath}
+          src={imageUrl}
           alt={skill}
           className="skill-icon-image"
           onError={() => setImageError(true)}
@@ -140,8 +140,11 @@ function SkillIcon({ skill }) {
     )
   }
 
-  // フォールバックアイコンがない場合は何も表示しない
-  return null
+  return (
+    <div className="skill-circle-icon-bg">
+      <FallbackIcon style={{ color: '#10B981', fontSize: '24px' }} />
+    </div>
+  )
 }
 
 function Skills() {
