@@ -35,6 +35,7 @@ const works = [
     tools: ['Cursor AI', 'Storybook', 'Spotify API（想定）'],
     note: 'ノーコードを起点に制作し、デザインツールを使わずにUI設計を進行。コンポーネントはStorybookで管理し、設計と実装の往復をしやすい構成にしています。',
     techSummary: 'ノーコード構築、コンポーネントをStorybook管理、Spotify連携は設計済み（実装途中）。',
+    impact: 'デモ公開とUIカタログ運用を実現し、改善サイクルを回せる開発土台を構築。',
     caseSummary: {
       challenge: '学習プロジェクトでも、実務に近い設計・改善フローを再現したい。',
       approach: 'コンポーネント単位で仕様を分解し、Storybookで見た目と状態を検証。GitHub Pagesで公開し、改善サイクルを回せる状態を整備。',
@@ -52,6 +53,7 @@ const works = [
     responsibilities: ['デザイン', 'ディレクション', 'CX'],
     scope: ['情報設計', 'UI', '進行管理', '改善運用'],
     tools: ['Adobe XD', 'Googleスプレッドシート', 'Google Analytics'],
+    impact: '継続的な改善運用を通じて、CS/CXの観点で施策立案から実装連携までを一貫推進。',
     titleIcon: FaMoon,
   },
   {
@@ -60,6 +62,7 @@ const works = [
     responsibilities: ['デザイン', 'ディレクション'],
     scope: ['情報設計', 'UI', '進行管理'],
     tools: ['Adobe XD', 'Figma'],
+    impact: 'コーポレート情報の構造を再設計し、事業理解を促進する情報導線へ刷新。',
     titleIcon: FaBuilding,
   },
   {
@@ -68,6 +71,7 @@ const works = [
     responsibilities: ['デザイン', 'コーディング'],
     scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Photoshop'],
+    impact: '受験検討層の閲覧体験を意識した導線設計で、学校情報への到達性を改善。',
     titleIcon: FaChild,
   },
   {
@@ -76,6 +80,7 @@ const works = [
     responsibilities: ['デザイン'],
     scope: ['コンセプト設計', 'UI', 'ビジュアル設計'],
     tools: ['Illustrator', 'Photoshop'],
+    impact: 'サービスコンセプトを視覚言語へ落とし込み、媒体横断で使えるブランド基盤を整備。',
     titleIcon: FaPenNib,
   },
   {
@@ -84,6 +89,7 @@ const works = [
     responsibilities: ['デザイン', 'コーディング'],
     scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Photoshop'],
+    impact: '既存クリエイティブを整理し、更新運用を見据えたUIデザインへ再構成。',
     titleIcon: FaMoon,
   },
   {
@@ -92,6 +98,7 @@ const works = [
     responsibilities: ['デザイン', 'コーディング'],
     scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Photoshop'],
+    impact: '企業情報の見せ方を再設計し、採用・事業両面で伝わる構成へ刷新。',
     titleIcon: FaUsers,
   },
   {
@@ -100,6 +107,7 @@ const works = [
     responsibilities: ['デザイン', 'サブコーディング'],
     scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Googleスプレッドシート'],
+    impact: '部門間連携で制作進行を安定化し、公開までの実装連携を円滑に推進。',
     titleIcon: FaShippingFast,
   },
   {
@@ -108,6 +116,7 @@ const works = [
     responsibilities: ['デザイン', 'サブコーディング'],
     scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Google Analytics'],
+    impact: '海外向けブランド訴求を意識したUIを構築し、グローバル展開の初期基盤を整備。',
     titleIcon: FaPaintBrush,
   },
   {
@@ -116,6 +125,7 @@ const works = [
     responsibilities: ['デザイン', 'サブコーディング'],
     scope: ['情報設計', 'UI', '実装連携'],
     tools: ['Adobe XD', 'Googleスプレッドシート'],
+    impact: '学生向けの情報優先度を再設計し、採用導線を整理したサイト体験へ改善。',
     titleIcon: FaUserTie,
   },
 ]
@@ -191,6 +201,12 @@ function Works() {
                   <p className="work-tech-summary">
                     <span className="work-tech-summary-label">技術要約:</span>
                     {work.techSummary}
+                  </p>
+                )}
+                {work.impact && (
+                  <p className="work-impact">
+                    <span className="work-impact-label">成果（公開可能範囲）:</span>
+                    {work.impact}
                   </p>
                 )}
                 {work.caseSummary && (
