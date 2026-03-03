@@ -53,7 +53,7 @@ const works = [
     responsibilities: ['デザイン', 'ディレクション', 'CX'],
     scope: ['情報設計', 'UI', '進行管理', '改善運用'],
     tools: ['Adobe XD', 'Googleスプレッドシート', 'Google Analytics'],
-    impact: '継続的な改善運用を通じて、CS/CXの観点で施策立案から実装連携までを一貫推進。',
+    impact: '継続的な改善運用を通じて、CS/CXの観点で施策立案から実装連携までを推進。',
     titleIcon: FaMoon,
   },
   {
