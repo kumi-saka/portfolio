@@ -96,16 +96,14 @@ const getSkillImagePath = (skill) => {
 
 // フォールバックアイコンマッピング
 const getFallbackIcon = (skill) => {
-  const iconMap = {
-    'ユーザーインタビュー': FaUserFriends,
-    'シナリオ作成': FaFileAlt,
-    'CJM作成': FaRoute,
-    'SEO': FaSearch,
-    'Google Analytics': FaChartBar,
-    'notion': FaStickyNote,
-    'Slack': FaSlack
-  }
-  return iconMap[skill] || FaCode
+  if (skill === 'ユーザーインタビュー') return <FaUserFriends style={{ color: '#10B981', fontSize: '24px' }} />
+  if (skill === 'シナリオ作成') return <FaFileAlt style={{ color: '#10B981', fontSize: '24px' }} />
+  if (skill === 'CJM作成') return <FaRoute style={{ color: '#10B981', fontSize: '24px' }} />
+  if (skill === 'SEO') return <FaSearch style={{ color: '#10B981', fontSize: '24px' }} />
+  if (skill === 'Google Analytics') return <FaChartBar style={{ color: '#10B981', fontSize: '24px' }} />
+  if (skill === 'notion') return <FaStickyNote style={{ color: '#10B981', fontSize: '24px' }} />
+  if (skill === 'Slack') return <FaSlack style={{ color: '#10B981', fontSize: '24px' }} />
+  return <FaCode style={{ color: '#10B981', fontSize: '24px' }} />
 }
 
 // スキルアイコンコンポーネント
@@ -115,13 +113,13 @@ function SkillIcon({ skill }) {
   const imageUrl = imagePath
     ? `${import.meta.env.BASE_URL}${imagePath.replace(/^\//, '')}`
     : null
-  const FallbackIcon = getFallbackIcon(skill)
+  const fallbackIcon = getFallbackIcon(skill)
 
   // 画像が読み込めない、または画像パスがない場合はフォールバックアイコンを表示
   if (imageError || !imageUrl) {
     return (
       <div className="skill-circle-icon-bg">
-        <FallbackIcon style={{ color: '#10B981', fontSize: '24px' }} />
+        {fallbackIcon}
       </div>
     )
   }
@@ -140,11 +138,7 @@ function SkillIcon({ skill }) {
     )
   }
 
-  return (
-    <div className="skill-circle-icon-bg">
-      <FallbackIcon style={{ color: '#10B981', fontSize: '24px' }} />
-    </div>
-  )
+  return <div className="skill-circle-icon-bg">{fallbackIcon}</div>
 }
 
 function Skills() {

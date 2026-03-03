@@ -89,3 +89,12 @@
     transform: translateX(0);
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .section-fade-in,
+  .section-fade-in.from-right,
+  .section-fade-in.from-left {
+    animation: none !important;
+    transform: none !important;
+  }
+}

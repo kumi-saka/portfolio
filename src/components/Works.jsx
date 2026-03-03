@@ -1,3 +1,4 @@
+import { createElement } from 'react'
 import './Works.css'
 import {
   FaBuilding,
@@ -157,11 +158,7 @@ function Works() {
       <div className="works-list">
         {works.map((work, index) => {
           const toolIcons = (work.tools || [])
-            .map((tool) => ({
-              tool,
-              Icon: toolIconMap[tool],
-            }))
-            .filter((item) => Boolean(item.Icon))
+            .filter((tool) => Boolean(toolIconMap[tool]))
             .slice(0, 3)
           const TitleIcon = work.titleIcon || FaCode
 
@@ -170,9 +167,11 @@ function Works() {
               <div className="work-item-content">
                 <div className="work-inline-tools" aria-label="使用ツールアイコン">
                   {toolIcons.length > 0 ? (
-                    toolIcons.map(({ tool, Icon }) => (
+                    toolIcons.map((tool) => (
                       <span key={tool} className="work-tool-icon-chip" title={tool}>
-                        <Icon className={`work-tool-icon ${getToolIconClass(tool)}`} />
+                        {createElement(toolIconMap[tool], {
+                          className: `work-tool-icon ${getToolIconClass(tool)}`
+                        })}
                       </span>
                     ))
                   ) : (
