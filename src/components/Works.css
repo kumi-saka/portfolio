@@ -39,6 +39,13 @@
   justify-content: center;
   width: 28px;
   height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  max-width: 28px;
+  max-height: 28px;
+  aspect-ratio: 1 / 1;
+  flex-shrink: 0;
+  overflow: hidden;
   border-radius: 8px;
   background-color: var(--color-bg-tertiary);
   border: 1px solid var(--color-border);

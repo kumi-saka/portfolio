@@ -300,8 +300,3 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .bird-layer {
-    display: none;
-  }
-}
