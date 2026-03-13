@@ -1,4 +1,5 @@
 import './DesignGuideline.css'
+import { FaSpaghettiMonsterFlying } from 'react-icons/fa6'
 
 const colorGroups = [
   {
@@ -115,24 +116,39 @@ function DesignGuideline() {
         </article>
 
         <article className="guideline-card">
-          <h3>Card Pattern</h3>
-          <p>情報カードは「タイトル / 補足 / メタ情報」の3層で一貫した読み順を作ります。</p>
-          <div className="card-preview-list">
-            <div className="card-preview-item">
-              <span>Card Header</span>
-              <code>Title + icon</code>
-              <small>まず「何の情報か」を明示</small>
-            </div>
-            <div className="card-preview-item">
-              <span>Card Body</span>
-              <code>summary / note / context</code>
-              <small>目的と背景を短く伝える</small>
-            </div>
-            <div className="card-preview-item">
-              <span>Card Meta</span>
-              <code>year / role / tools</code>
-              <small>比較しやすい要素を末尾に整理</small>
-            </div>
+          <h3>Works Card / Detail Modal</h3>
+          <p>カードは「何の案件か → 何をしたか → いつの案件か」の順で、短時間で把握できる構成にします。</p>
+          <ol className="guideline-plain-list">
+            <li className="guideline-plain-item">
+              <strong>1. 案件名（最初に読む）</strong>
+              <code>例: ポモドーロアプリ（個人制作）</code>
+              <small>カードを開かなくても、案件の種類が分かるようにする。</small>
+            </li>
+            <li className="guideline-plain-item">
+              <strong>2. 担当範囲（次に読む）</strong>
+              <code>例: 情報設計 / UI / プロトタイプ</code>
+              <small>自分の役割を1行で示し、比較しやすくする。</small>
+            </li>
+            <li className="guideline-plain-item">
+              <strong>3. 年・ツール（最後に確認）</strong>
+              <code>例: YEAR 2026 / Figma / Storybook</code>
+              <small>時期と技術要素を末尾に置き、複数案件を並べて比較しやすくする。</small>
+            </li>
+          </ol>
+          <div className="guideline-plain-meta">
+            <p><strong>構造:</strong> Thumbnail / Title / Meta / Action</p>
+            <p><strong>状態:</strong> default / hover / active を枠線と影で差分化</p>
+            <p><strong>可読性:</strong> タイトル2行以内、メタは短文で統一</p>
+          </div>
+          <div className="component-preview-card">
+            <article className="guideline-work-card-preview">
+              <div className="guideline-work-card-thumb">16:9</div>
+              <div className="guideline-work-card-body">
+                <h4>ポモドーロアプリ（個人制作）</h4>
+                <p>担当範囲: 情報設計 / UI / プロトタイプ</p>
+                <span>詳細を見る</span>
+              </div>
+            </article>
           </div>
           <div className="radius-list">
             {radiusTokens.map((token) => (
@@ -144,6 +160,75 @@ function DesignGuideline() {
                 </div>
               </div>
             ))}
+          </div>
+        </article>
+
+        <article className="guideline-card">
+          <h3>Skill Ring</h3>
+          <p>スキルをカテゴリ別に整理し、リングで相対的な強みをひと目で伝える構成にします。</p>
+          <ol className="guideline-plain-list">
+            <li className="guideline-plain-item">
+              <strong>1. カテゴリで整理</strong>
+              <code>例: デザイン / 開発 / UX / その他</code>
+              <small>近いスキルをまとめて、全体のバランスを把握しやすくする。</small>
+            </li>
+            <li className="guideline-plain-item">
+              <strong>2. リングで相対値を表示</strong>
+              <code>例: Figma 75%</code>
+              <small>厳密な評価ではなく、得意領域の目安として可視化する。</small>
+            </li>
+            <li className="guideline-plain-item">
+              <strong>3. アイコンで認識性を補助</strong>
+              <code>画像がない場合はフォールバックアイコンを表示</code>
+              <small>視覚的に識別しやすくし、情報欠損を防ぐ。</small>
+            </li>
+          </ol>
+          <div className="guideline-plain-meta">
+            <p><strong>構造:</strong> Ring / Icon / Label</p>
+            <p><strong>状態:</strong> カードはカテゴリ単位でグルーピング</p>
+            <p><strong>可読性:</strong> ラベルは短く、アイコンとセットで表示</p>
+          </div>
+          <div className="component-preview-card">
+            <div className="guideline-skill-ring-preview">
+              <div className="guideline-skill-ring" aria-hidden="true">
+                <span className="guideline-skill-ring-inner">
+                  <img
+                    src={`${import.meta.env.BASE_URL}skills/figma.png`}
+                    alt="Figma"
+                    className="guideline-skill-icon-image"
+                  />
+                </span>
+              </div>
+              <div className="guideline-skill-meta">
+                <strong>Figma</strong>
+                <small>Skill Ring Sample</small>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article className="guideline-card">
+          <h3>Character (かもめ)</h3>
+          <p>ヘッダー上を飛行する装飾キャラクター。遊びごころのあるアニメーションを入れたくて入れてみました。</p>
+          <div className="component-preview-card component-preview-card-plain">
+            <div className="guideline-motion-preview bird-only" aria-hidden="true">
+              <svg className="guideline-bird-svg bird-a" viewBox="0 0 32 16">
+                <path className="guideline-bird-path" d="M2 12 Q8 2 16 12 Q24 2 30 12" />
+              </svg>
+              <svg className="guideline-bird-svg bird-b" viewBox="0 0 32 16">
+                <path className="guideline-bird-path" d="M2 12 Q8 2 16 12 Q24 2 30 12" />
+              </svg>
+            </div>
+          </div>
+        </article>
+
+        <article className="guideline-card">
+          <h3>Character (かに)</h3>
+          <p>ページ右下でふわふわ動く装飾キャラクター。遊びごころのあるアニメーションを入れたくて入れてみました。</p>
+          <div className="component-preview-card component-preview-card-plain">
+            <div className="guideline-motion-preview crab-only" aria-hidden="true">
+              <FaSpaghettiMonsterFlying className="guideline-crab-icon" />
+            </div>
           </div>
         </article>
       </div>

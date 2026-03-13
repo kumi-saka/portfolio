@@ -1,4 +1,5 @@
-import { createElement } from 'react'
+import { createElement, useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import './Works.css'
 import {
   FaBuilding,
@@ -28,6 +29,7 @@ import {
 
 const works = [
   {
+    id: 'pomodoro-2026',
     title: 'ポモドーロアプリ（個人制作）',
     year: '2026',
     responsibilities: ['企画', 'ノーコード制作', 'UIデザイン'],
@@ -46,8 +48,12 @@ const works = [
     storybookUrl: 'https://695f311e6b1f9784a5cc8058-enwmtuvkju.chromatic.com/',
     repoUrl: 'https://github.com/kumi-saka/pomodoro-study-music/',
     titleIcon: FaClock,
+    thumbnailUrl: `${import.meta.env.BASE_URL}works/pomodoro-thumbnail.png`,
+    thumbnailType: 'featured',
+    thumbnailCaption: '公開デモあり',
   },
   {
+    id: 'fortune-app-2019',
     title: '占いアプリ CS・CX達成のための発案・構築・運用全般',
     year: '2019',
     responsibilities: ['デザイン', 'ディレクション', 'CX'],
@@ -55,8 +61,11 @@ const works = [
     tools: ['Adobe XD', 'Googleスプレッドシート', 'Google Analytics'],
     impact: '継続的な改善運用を通じて、CS/CXの観点で施策立案から実装連携までを推進。',
     titleIcon: FaMoon,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'corp-renewal-2019',
     title: '事業会社 コーポレートサイトリニューアル',
     year: '2019',
     responsibilities: ['デザイン', 'ディレクション'],
@@ -64,8 +73,11 @@ const works = [
     tools: ['Adobe XD', 'Figma'],
     impact: 'コーポレート情報の構造を再設計し、事業理解を促進する情報導線へ刷新。',
     titleIcon: FaBuilding,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'school-renewal-2018',
     title: '保育士専門学校オフィシャルサイトリニューアル',
     year: '2018',
     responsibilities: ['デザイン', 'コーディング'],
@@ -73,8 +85,11 @@ const works = [
     tools: ['Adobe XD', 'Photoshop'],
     impact: '受験検討層の閲覧体験を意識した導線設計で、学校情報への到達性を改善。',
     titleIcon: FaChild,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'fortune-logo-2018',
     title: '電話占い サービスロゴデザイン作成',
     year: '2018',
     responsibilities: ['デザイン'],
@@ -82,8 +97,11 @@ const works = [
     tools: ['Illustrator', 'Photoshop'],
     impact: 'サービスコンセプトを視覚言語へ落とし込み、媒体横断で使えるブランド基盤を整備。',
     titleIcon: FaPenNib,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'fortune-site-2018',
     title: '電話占いサイト・クリエイティブデザインリニューアル',
     year: '2018',
     responsibilities: ['デザイン', 'コーディング'],
@@ -91,8 +109,11 @@ const works = [
     tools: ['Adobe XD', 'Photoshop'],
     impact: '既存クリエイティブを整理し、更新運用を見据えたUIデザインへ再構成。',
     titleIcon: FaMoon,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'group-corp-2017',
     title: 'グループ会社（人材領域） コーポレートサイトリニューアル',
     year: '2017',
     responsibilities: ['デザイン', 'コーディング'],
@@ -100,8 +121,11 @@ const works = [
     tools: ['Adobe XD', 'Photoshop'],
     impact: '企業情報の見せ方を再設計し、採用・事業両面で伝わる構成へ刷新。',
     titleIcon: FaUsers,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'food-corp-2017',
     title: '食品系商社コーポレートサイト リニューアル',
     year: '2017',
     responsibilities: ['デザイン', 'サブコーディング'],
@@ -109,8 +133,11 @@ const works = [
     tools: ['Adobe XD', 'Googleスプレッドシート'],
     impact: '部門間連携で制作進行を安定化し、公開までの実装連携を円滑に推進。',
     titleIcon: FaShippingFast,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'cosme-global-2016',
     title: '国内メーカー化粧品ブランドの海外向けサイト 新規構築',
     year: '2016',
     responsibilities: ['デザイン', 'サブコーディング'],
@@ -118,8 +145,11 @@ const works = [
     tools: ['Adobe XD', 'Google Analytics'],
     impact: '海外向けブランド訴求を意識したUIを構築し、グローバル展開の初期基盤を整備。',
     titleIcon: FaPaintBrush,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
   {
+    id: 'group-recruit-2016',
     title: 'グループ会社（人材領域） 新卒採用サイトリニューアル',
     year: '2016',
     responsibilities: ['デザイン', 'サブコーディング'],
@@ -127,6 +157,8 @@ const works = [
     tools: ['Adobe XD', 'Googleスプレッドシート'],
     impact: '学生向けの情報優先度を再設計し、採用導線を整理したサイト体験へ改善。',
     titleIcon: FaUserTie,
+    thumbnailType: 'confidential',
+    thumbnailCaption: 'NDA / 概要のみ公開',
   },
 ]
 
@@ -156,6 +188,37 @@ const getToolIconClass = (tool) => {
 }
 
 function Works() {
+  const [selectedWorkId, setSelectedWorkId] = useState(null)
+
+  const selectedWork = useMemo(
+    () => works.find((work) => work.id === selectedWorkId) || null,
+    [selectedWorkId]
+  )
+
+  useEffect(() => {
+    if (!selectedWork) return undefined
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') setSelectedWorkId(null)
+    }
+
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [selectedWork])
+
+  useEffect(() => {
+    if (!selectedWork) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [selectedWork])
+
+  const closeModal = () => setSelectedWorkId(null)
+
   return (
     <section className="works">
       <h2 className="section-title">Works</h2>
@@ -166,14 +229,40 @@ function Works() {
       </p>
 
       <div className="works-list">
-        {works.map((work, index) => {
+        {works.map((work) => {
           const toolIcons = (work.tools || [])
             .filter((tool) => Boolean(toolIconMap[tool]))
             .slice(0, 3)
           const TitleIcon = work.titleIcon || FaCode
 
           return (
-            <div key={index} className="work-item">
+            <article key={work.id} className="work-item">
+              <button
+                type="button"
+                className="work-card-button"
+                onClick={() => setSelectedWorkId(work.id)}
+                aria-label={`${work.title} の詳細を開く`}
+              >
+                <div
+                  className={`work-thumbnail ${
+                    work.thumbnailType === 'featured' ? 'featured' : 'confidential'
+                  }`}
+                >
+                  {work.thumbnailUrl ? (
+                    <img
+                      src={work.thumbnailUrl}
+                      alt={`${work.title} のサムネイル`}
+                      className="work-thumbnail-image"
+                      style={work.thumbnailObjectPosition ? { objectPosition: work.thumbnailObjectPosition } : undefined}
+                    />
+                  ) : (
+                    <>
+                      <TitleIcon className="work-thumbnail-icon" aria-hidden="true" />
+                      <span className="work-thumbnail-text">{work.thumbnailCaption}</span>
+                    </>
+                  )}
+                </div>
+
               <div className="work-item-content">
                 <div className="work-inline-tools" aria-label="使用ツールアイコン">
                   {toolIcons.length > 0 ? (
@@ -191,68 +280,8 @@ function Works() {
                   )}
                 </div>
                 <h3 className="work-title">
-                  <span className="work-title-row">
-                    <TitleIcon className="work-title-icon" aria-hidden="true" />
-                    <span>{work.title}</span>
-                  </span>
+                  <span>{work.title}</span>
                 </h3>
-                {work.note && <p className="work-note">{work.note}</p>}
-                {work.techSummary && (
-                  <p className="work-tech-summary">
-                    <span className="work-tech-summary-label">技術要約:</span>
-                    {work.techSummary}
-                  </p>
-                )}
-                {work.impact && (
-                  <p className="work-impact">
-                    <span className="work-impact-label">成果（公開可能範囲）:</span>
-                    {work.impact}
-                  </p>
-                )}
-                {work.caseSummary && (
-                  <div className="work-case-summary">
-                    <p className="work-case-item"><span className="work-case-label">課題:</span>{work.caseSummary.challenge}</p>
-                    <p className="work-case-item"><span className="work-case-label">施策:</span>{work.caseSummary.approach}</p>
-                    <p className="work-case-item"><span className="work-case-label">成果:</span>{work.caseSummary.result}</p>
-                  </div>
-                )}
-                {(work.appUrl || work.storybookUrl || work.repoUrl) && (
-                  <div className="work-links">
-                    {work.appUrl && (
-                      <a
-                        href={work.appUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="work-repo-link"
-                      >
-                        <FaExternalLinkAlt aria-hidden="true" />
-                        <span>{work.appLabel || '公開URL'}</span>
-                      </a>
-                    )}
-                    {work.storybookUrl && (
-                      <a
-                        href={work.storybookUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="work-repo-link"
-                      >
-                        <SiStorybook aria-hidden="true" />
-                        <span>Storybook（Chromatic）</span>
-                      </a>
-                    )}
-                    {work.repoUrl && (
-                      <a
-                        href={work.repoUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="work-repo-link"
-                      >
-                        <FaGithub aria-hidden="true" />
-                        <span>GitHub Repository</span>
-                      </a>
-                    )}
-                  </div>
-                )}
                 <div className="work-overview">
                 {work.scope && work.scope.length > 0 && (
                   <div className="work-scope">
@@ -268,7 +297,7 @@ function Works() {
                 </div>
                 <div className="work-year">
                   <span className="work-year-label">YEAR</span>
-                  <span className="work-year-value">| {work.year}</span>
+                  <span className="work-year-value">{work.year}</span>
                 </div>
                 {work.tools && work.tools.length > 0 && (
                   <div className="work-tools">
@@ -283,11 +312,137 @@ function Works() {
                   </div>
                 )}
                 </div>
+                <span className="work-open-detail">詳細を見る</span>
               </div>
-            </div>
+              </button>
+            </article>
           )
         })}
       </div>
+
+      {selectedWork && typeof document !== 'undefined'
+        ? createPortal(
+          <div className="work-modal-backdrop" onClick={closeModal}>
+            <div
+              className="work-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${selectedWork.title} の詳細`}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="work-modal-header">
+                <h3 className="work-modal-title">{selectedWork.title}</h3>
+                <button type="button" className="work-modal-close" onClick={closeModal} aria-label="閉じる">
+                  ×
+                </button>
+              </div>
+
+              <div className="work-modal-body">
+                <p className="work-modal-meta">
+                  <span className="work-label">YEAR:</span> {selectedWork.year}
+                </p>
+
+                {selectedWork.scope && selectedWork.scope.length > 0 ? (
+                  <p className="work-modal-meta">
+                    <span className="work-label">担当範囲:</span> {selectedWork.scope.join(' / ')}
+                  </p>
+                ) : null}
+
+                {selectedWork.responsibilities && selectedWork.responsibilities.length > 0 ? (
+                  <p className="work-modal-meta">
+                    <span className="work-label">担当:</span> {selectedWork.responsibilities.join('、')}
+                  </p>
+                ) : null}
+
+                {selectedWork.note ? <p className="work-note">{selectedWork.note}</p> : null}
+
+                {selectedWork.techSummary ? (
+                  <p className="work-tech-summary">
+                    <span className="work-tech-summary-label">技術要約:</span>
+                    {selectedWork.techSummary}
+                  </p>
+                ) : null}
+
+                {selectedWork.impact ? (
+                  <p className="work-impact">
+                    <span className="work-impact-label">成果（公開可能範囲）:</span>
+                    {selectedWork.impact}
+                  </p>
+                ) : null}
+
+                {selectedWork.caseSummary ? (
+                  <div className="work-case-summary">
+                    <p className="work-case-item">
+                      <span className="work-case-label">課題:</span>
+                      {selectedWork.caseSummary.challenge}
+                    </p>
+                    <p className="work-case-item">
+                      <span className="work-case-label">施策:</span>
+                      {selectedWork.caseSummary.approach}
+                    </p>
+                    <p className="work-case-item">
+                      <span className="work-case-label">成果:</span>
+                      {selectedWork.caseSummary.result}
+                    </p>
+                  </div>
+                ) : null}
+
+                {selectedWork.tools && selectedWork.tools.length > 0 ? (
+                  <div className="work-tools">
+                    <span className="work-tools-label">Tools & topics:</span>
+                    <div className="work-tools-list">
+                      {selectedWork.tools.map((tool) => (
+                        <span key={tool} className="work-tool-item">
+                          {tool}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                {(selectedWork.appUrl || selectedWork.storybookUrl || selectedWork.repoUrl) ? (
+                  <div className="work-links">
+                    {selectedWork.appUrl ? (
+                      <a
+                        href={selectedWork.appUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="work-repo-link"
+                      >
+                        <FaExternalLinkAlt aria-hidden="true" />
+                        <span>{selectedWork.appLabel || '公開URL'}</span>
+                      </a>
+                    ) : null}
+                    {selectedWork.storybookUrl ? (
+                      <a
+                        href={selectedWork.storybookUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="work-repo-link"
+                      >
+                        <SiStorybook aria-hidden="true" />
+                        <span>Storybook（Chromatic）</span>
+                      </a>
+                    ) : null}
+                    {selectedWork.repoUrl ? (
+                      <a
+                        href={selectedWork.repoUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="work-repo-link"
+                      >
+                        <FaGithub aria-hidden="true" />
+                        <span>GitHub Repository</span>
+                      </a>
+                    ) : null}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          </div>,
+          document.body
+        )
+        : null}
     </section>
   )
 }
