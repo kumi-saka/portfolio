@@ -16,6 +16,7 @@ const colorGroups = [
       { name: 'Text Primary', code: '--color-text-primary', value: '#1a1d29', usage: '見出し・主要本文' },
       { name: 'Text Secondary', code: '--color-text-secondary', value: 'rgba(26,29,41,0.7)', usage: '本文の補助情報' },
       { name: 'Accent', code: '--color-accent', value: '#DC2626', usage: '強調・アクティブ状態' },
+      { name: 'Accent Green', code: '--color-accent-green', value: '#10b981', usage: '補助アクセント' },
     ],
   },
 ]
