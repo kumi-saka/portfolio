@@ -1,6 +1,6 @@
 # Portfolio
 
-UI/UXデザイナー向けのポートフォリオサイトです。  
+UI/UXデザイナーのポートフォリオサイトです。
 `Experience` / `Works` / `Skills` / `Design Guideline` の4セクションで、経歴・実績・スキルを整理しています。
 
 ## Tech Stack
