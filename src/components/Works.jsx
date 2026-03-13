@@ -23,11 +23,42 @@ import {
   SiFigma,
   SiGoogleanalytics,
   SiGooglesheets,
+  SiReact,
   SiSpotify,
   SiStorybook,
+  SiVite,
 } from 'react-icons/si'
 
 const works = [
+  {
+    id: 'portfolio-ai-cocreate-2026',
+    title: 'AI共創によるポートフォリオ構築（AIのバイブコーディングを検証したケーススタディ）',
+    year: '2026',
+    tools: ['React', 'Vite', 'Cursor AI', 'GitHub Pages'],
+    thumbnailUrl: `${import.meta.env.BASE_URL}works/ai-case-bg.png`,
+    modalPoints: [
+      {
+        label: '背景',
+        text: 'Figmaデータなし・手書きコーディングなしで、リリースまで実際に進められるのかを試したいという気持ちから着手。AIを活用したときに、デザインから実装・公開までをどこまで回せるかを検証した。',
+      },
+      {
+        label: '技術選定理由',
+        text: 'React + Viteは、AIと相談して画面を部品ごとに分けて作りやすく、UIの試作や修正をすぐ確認できる。ビルドやローカル確認も軽いため、調整サイクルを短く回しやすい構成として採用した。',
+      },
+      {
+        label: '大変だったところ',
+        text: '大枠の構成は短時間で形になった一方、AI提案の取捨選択とUIの細部（余白・動き・見え方）の詰めはラリーが多く、調整を重ねる必要があった。',
+      },
+      {
+        label: '成果',
+        text: 'AIエージェント活用の心理的ハードルが下がり、設計〜実装〜公開までを伴走させる進め方を実体験として獲得できた。',
+      },
+    ],
+    repoUrl: 'https://github.com/kumi-saka/portfolio',
+    titleIcon: FaRobot,
+    thumbnailType: 'ai-case',
+    thumbnailCaption: '',
+  },
   {
     id: 'pomodoro-2026',
     title: 'ポモドーロアプリ（個人制作）',
@@ -37,7 +68,6 @@ const works = [
     tools: ['Cursor AI', 'Storybook', 'Spotify API（想定）'],
     note: 'ノーコードを起点に制作し、デザインツールを使わずにUI設計を進行。コンポーネントはStorybookで管理し、設計と実装の往復をしやすい構成にしています。',
     techSummary: 'ノーコード構築、コンポーネントをStorybook管理、Spotify連携は設計済み（実装途中）。',
-    impact: '仕様の分解から公開後の改善運用までを一貫して回せる体制を整え、継続改善しやすい土台を構築。',
     caseSummary: {
       challenge: '学習プロジェクトでも、実務に近い設計・改善フローを再現したい。',
       approach: 'コンポーネント単位で仕様を分解し、Storybookで見た目と状態を検証。GitHub Pagesで公開し、改善サイクルを回せる状態を整備。',
@@ -167,6 +197,8 @@ const toolIconMap = {
   Photoshop: SiAdobephotoshop,
   Illustrator: SiAdobeillustrator,
   Figma: SiFigma,
+  React: SiReact,
+  Vite: SiVite,
   'Google Analytics': SiGoogleanalytics,
   'Googleスプレッドシート': SiGooglesheets,
   'Cursor AI': FaRobot,
@@ -178,6 +210,8 @@ const getToolIconClass = (tool) => {
   if (tool === 'Adobe XD') return 'tool-adobe-xd'
   if (tool === 'Photoshop') return 'tool-photoshop'
   if (tool === 'Illustrator') return 'tool-illustrator'
+  if (tool === 'React') return 'tool-default'
+  if (tool === 'Vite') return 'tool-default'
   if (tool === 'Figma') return 'tool-figma'
   if (tool === 'Google Analytics') return 'tool-google-analytics'
   if (tool === 'Googleスプレッドシート') return 'tool-google-sheets'
@@ -245,7 +279,11 @@ function Works() {
               >
                 <div
                   className={`work-thumbnail ${
-                    work.thumbnailType === 'featured' ? 'featured' : 'confidential'
+                    work.thumbnailType === 'featured'
+                      ? 'featured'
+                      : work.thumbnailType === 'ai-case'
+                        ? 'ai-case'
+                        : 'confidential'
                   }`}
                 >
                   {work.thumbnailUrl ? (
@@ -258,7 +296,9 @@ function Works() {
                   ) : (
                     <>
                       <TitleIcon className="work-thumbnail-icon" aria-hidden="true" />
-                      <span className="work-thumbnail-text">{work.thumbnailCaption}</span>
+                      {work.thumbnailCaption ? (
+                        <span className="work-thumbnail-text">{work.thumbnailCaption}</span>
+                      ) : null}
                     </>
                   )}
                 </div>
@@ -289,12 +329,14 @@ function Works() {
                     <span className="work-scope-list">{work.scope.join(' / ')}</span>
                   </div>
                 )}
-                <div className="work-responsibilities">
-                  <span className="work-label">担当:</span>
-                  <span className="work-responsibilities-list">
-                    {work.responsibilities.join('、')}
-                  </span>
-                </div>
+                {work.responsibilities && work.responsibilities.length > 0 && (
+                  <div className="work-responsibilities">
+                    <span className="work-label">担当:</span>
+                    <span className="work-responsibilities-list">
+                      {work.responsibilities.join('、')}
+                    </span>
+                  </div>
+                )}
                 <div className="work-year">
                   <span className="work-year-label">YEAR</span>
                   <span className="work-year-value">{work.year}</span>
@@ -370,7 +412,15 @@ function Works() {
                   </p>
                 ) : null}
 
-                {selectedWork.caseSummary ? (
+                {selectedWork.modalPoints && selectedWork.modalPoints.length > 0 ? (
+                  <>
+                    {selectedWork.modalPoints.map((item) => (
+                      <p key={item.label} className="work-modal-meta">
+                        <span className="work-label">{item.label}:</span> {item.text}
+                      </p>
+                    ))}
+                  </>
+                ) : selectedWork.caseSummary ? (
                   <div className="work-case-summary">
                     <p className="work-case-item">
                       <span className="work-case-label">課題:</span>
