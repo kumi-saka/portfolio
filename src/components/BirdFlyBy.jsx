@@ -67,36 +67,27 @@ function BirdFlyBy() {
   }, [])
 
   return (
-    <div className="bird-layer" aria-hidden="true">
-      {flight ? (
-        <div
-          key={flight.id}
-          className="flight-cluster flight-birds"
-          style={{
-            '--flight-from-x': flight.fromX,
-            '--flight-to-x': flight.toX,
-            '--flight-from-y': flight.fromY,
-            '--flight-to-y': flight.toY,
-            '--flight-duration': `${flight.duration}s`,
-            '--facing': flight.facing,
-            '--small-behind-x': `${flight.facing === 1 ? -46 : 46}px`,
-            '--small-chase-dir': `${flight.facing === 1 ? -1 : 1}`,
-            '--pulse-duration': `${flight.pulseDuration}s`,
-          }}
-        >
-          <div className="birds-scene">
-            <div className="bird-track bird-track-large">
-              <div className="icon-node bird-large">
-                <div className="icon-pulse">
-                  <svg className="bird-icon" viewBox="0 0 32 16">
-                    <path className="bird-icon-line" d="M2 12 Q8 2 16 12 Q24 2 30 12" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="bird-track bird-track-small">
-              <div className="bird-small-chase-motion">
-                <div className="icon-node bird-small">
+    <>
+      <div className="bird-layer" aria-hidden="true">
+        {flight ? (
+          <div
+            key={flight.id}
+            className="flight-cluster flight-birds"
+            style={{
+              '--flight-from-x': flight.fromX,
+              '--flight-to-x': flight.toX,
+              '--flight-from-y': flight.fromY,
+              '--flight-to-y': flight.toY,
+              '--flight-duration': `${flight.duration}s`,
+              '--facing': flight.facing,
+              '--small-behind-x': `${flight.facing === 1 ? -46 : 46}px`,
+              '--small-chase-dir': `${flight.facing === 1 ? -1 : 1}`,
+              '--pulse-duration': `${flight.pulseDuration}s`,
+            }}
+          >
+            <div className="birds-scene">
+              <div className="bird-track bird-track-large">
+                <div className="icon-node bird-large">
                   <div className="icon-pulse">
                     <svg className="bird-icon" viewBox="0 0 32 16">
                       <path className="bird-icon-line" d="M2 12 Q8 2 16 12 Q24 2 30 12" />
@@ -104,14 +95,28 @@ function BirdFlyBy() {
                   </div>
                 </div>
               </div>
+              <div className="bird-track bird-track-small">
+                <div className="bird-small-chase-motion">
+                  <div className="icon-node bird-small">
+                    <div className="icon-pulse">
+                      <svg className="bird-icon" viewBox="0 0 32 16">
+                        <path className="bird-icon-line" d="M2 12 Q8 2 16 12 Q24 2 30 12" />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+        ) : null}
+        <div className="monster-fixed" aria-hidden="true">
+          <FaSpaghettiMonsterFlying className="monster-icon" />
         </div>
-      ) : null}
-      <div className="monster-fixed" aria-hidden="true">
-        <FaSpaghettiMonsterFlying className="monster-icon" />
       </div>
-    </div>
+      <div className="monster-mobile-slot" aria-hidden="true">
+        <FaSpaghettiMonsterFlying className="monster-icon monster-icon-mobile" />
+      </div>
+    </>
   )
 }
 

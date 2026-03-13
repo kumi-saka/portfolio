@@ -224,7 +224,7 @@ function DesignGuideline() {
         </article>
 
         <article className="guideline-card">
-          <h3>Character (かに)</h3>
+          <h3>Character (スパゲティモンスター)</h3>
           <p>ページ右下でふわふわ動く装飾キャラクター。遊びごころのあるアニメーションを入れたくて入れてみました。</p>
           <div className="component-preview-card component-preview-card-plain">
             <div className="guideline-motion-preview crab-only" aria-hidden="true">
