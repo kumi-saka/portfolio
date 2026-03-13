@@ -54,7 +54,6 @@ const works = [
         text: 'AIエージェント活用の心理的ハードルが下がり、設計〜実装〜公開までを伴走させる進め方を実体験として獲得できた。',
       },
     ],
-    repoUrl: 'https://github.com/kumi-saka/portfolio',
     titleIcon: FaRobot,
     thumbnailType: 'ai-case',
     thumbnailCaption: '',
