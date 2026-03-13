@@ -184,10 +184,19 @@
   }
 
   .experience-period {
-    left: -100px;
+    left: -92px;
     width: 80px;
     font-size: 12px;
-    padding-right: var(--spacing-sm);
+    padding-right: 0;
+    text-align: left;
+    white-space: normal;
+    line-height: 1.25;
+  }
+
+  .experience-period-second-line {
+    display: block;
+    padding-left: 0.65em;
+    white-space: nowrap;
   }
 
   .experience-title {

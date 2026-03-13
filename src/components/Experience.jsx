@@ -61,6 +61,17 @@ const experiences = [
 function Experience() {
   // 新しい順に並び替え（配列を逆順にする）
   const sortedExperiences = [...experiences].reverse()
+  const renderPeriod = (period) => {
+    const [start, end] = period.split(' - ')
+    if (!period.includes(' - ') || end === undefined || end.trim() === '') return period
+
+    return (
+      <>
+        <span className="experience-period-start">{start}</span>
+        <span className="experience-period-second-line">- {end}</span>
+      </>
+    )
+  }
 
   return (
     <section className="experience">
@@ -69,7 +80,7 @@ function Experience() {
       <div className="experience-list">
         {sortedExperiences.map((exp, index) => (
           <div key={index} className="experience-item">
-            <div className="experience-period">{exp.period}</div>
+            <div className="experience-period">{renderPeriod(exp.period)}</div>
             <div className="experience-content">
               <h3 className="experience-title">
                 {exp.title}
