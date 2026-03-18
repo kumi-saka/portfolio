@@ -134,6 +134,35 @@
   margin-top: 2px;
 }
 
+.experience-break {
+  margin: 0 0 var(--spacing-sm);
+  padding: 10px 12px;
+  border: 1px solid rgba(16, 185, 129, 0.26);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+}
+
+.experience-break-label {
+  display: inline-block;
+  font-size: 12px;
+  color: var(--color-text-tertiary);
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.experience-break-list {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.experience-break-list li + li {
+  margin-top: 2px;
+}
+
 .experience-tasks {
   display: flex;
   flex-wrap: wrap;
